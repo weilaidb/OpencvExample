@@ -1,0 +1,152 @@
+weixinjianwo | 我的经验 | 我的收入 | 私信(0) | 百度首页 
+百度经验新闻网页贴吧知道经验音乐图片视频地图百科文库
+
+搜索经验帮助
+首页分类杂志任务签到回享计划商城发烧友知道
+百度经验 > 游戏/数码 > 电脑 > 电脑软件
+OpenCV 2.4.9 +VS2013 开发环境配置听语音
+|浏览：29999|更新：2014-07-20 21:00
+1234567
+分步阅读
+OpenCV的全称是：Open Source Computer Vision Library。OpenCV是一个基于（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows和Mac OS操作系统上。它轻量级而且高效——由一系列 C 函数和少量 C++ 类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。
+
+现本教程，是在windows平台下使用visual studio2013和opencv2.4.9配置一个开发环境。
+
+工具/原料
+opencv2.4.9地址：https://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.4.9/opencv-2.4.9.exe/download
+vs2013请自行百度
+方法/步骤
+安装opencv2.4.9，解压，请务必记住自己解压的路径。宜家以我自己的路径为例D:\Program Files
+OpenCV 2.4.9 +VS2013 开发环境配置
+配置环境变量
+1、系统变量 Path：添加D:\Program Files (x86)\tmp\opencv\opencv\build\x86\vc12\bin
+2、用户变量：添加opencv变量，值D:\Program Files (x86)\tmp\opencv\opencv\build，添加PATH变量（有就不需要添加，但是值需要添加）值D:\Program Files (x86)\tmp\opencv\opencv\build\x86\vc12\bin
+说明：不管你系统是32位还是64位，路径目录均选择X86，因为编译都是使用32位编译；如果选用X64，则程序运行时候会出错。
+OpenCV 2.4.9 +VS2013 开发环境配置
+新建visual C项目
+新建 visual C++项目，如下图所示，项目选项注意：如下图。
+OpenCV 2.4.9 +VS2013 开发环境配置
+OpenCV 2.4.9 +VS2013 开发环境配置
+工程目录的配置（Debug）
+找到属性管理器，如果找不到，请安装下图方法找到。双击Debug|Win32打开如下窗口，
+设置如下：（下图红框项为设置项）
+1、包含目录：（VC++目录）
+D:\Program Files (x86)\tmp\opencv\opencv\build\include
+D:\Program Files (x86)\tmp\opencv\opencv\build\include\opencv
+D:\Program Files (x86)\tmp\opencv\opencv\build\include\opencv2
+2、库目录：（VC++目录）D:\Program Files (x86)\tmp\opencv\opencv\build\x86\vc12\lib
+3、连接器->输入->附加依赖项：
+opencv_ml249d.lib
+opencv_calib3d249d.lib
+opencv_contrib249d.lib
+opencv_core249d.lib
+opencv_features2d249d.lib
+opencv_flann249d.lib
+opencv_gpu249d.lib
+opencv_highgui249d.lib
+opencv_imgproc249d.lib
+opencv_legacy249d.lib
+opencv_objdetect249d.lib
+opencv_ts249d.lib
+opencv_video249d.lib
+opencv_nonfree249d.lib
+opencv_ocl249d.lib
+opencv_photo249d.lib
+opencv_stitching249d.lib
+opencv_superres249d.lib
+opencv_videostab249d.lib
+其实以上都是D:\Program Files (x86)\tmp\opencv\opencv\build\x86\vc12\lib下所有的lib文件，你会发现，有的后面带上d，有的没有d，这是因为Debug的就有d，Release则没有d。
+OpenCV 2.4.9 +VS2013 开发环境配置
+OpenCV 2.4.9 +VS2013 开发环境配置
+OpenCV 2.4.9 +VS2013 开发环境配置步骤阅读
+OpenCV 2.4.9 +VS2013 开发环境配置
+5
+工程目录的配置（Release）
+其他与Debug一样，只是连接器->输入->附加依赖项不一样，设置如下：
+opencv_objdetect249.lib
+opencv_ts249.lib
+opencv_video249.lib
+opencv_nonfree249.lib
+opencv_ocl249.lib
+opencv_photo249.lib
+opencv_stitching249.lib
+opencv_superres249.lib
+opencv_videostab249.lib
+opencv_calib3d249.lib
+opencv_contrib249.lib
+opencv_core249.lib
+opencv_features2d249.lib
+opencv_flann249.lib
+opencv_gpu249.lib
+opencv_highgui249.lib
+opencv_imgproc249.lib
+opencv_legacy249.lib
+opencv_ml249.lib
+6
+最终的测试
+1、新建一个cpp文件，如下图：在cpp文件上输入以下代码：
+#include <cv.h>
+#include <highgui.h>
+using namespace std;
+int main()
+{
+IplImage * test;
+test = cvLoadImage("D:\\Sample_8.bmp");//图片路径
+cvNamedWindow("test_demo", 1);
+cvShowImage("test_demo", test);
+cvWaitKey(0);
+cvDestroyWindow("test_demo");
+cvReleaseImage(&test);
+return 0;
+}
+OpenCV 2.4.9 +VS2013 开发环境配置
+OpenCV 2.4.9 +VS2013 开发环境配置
+END
+注意事项
+如果程序退出出错，请检测连接器->输入->附加依赖项有没有出错
+经验内容仅供参考，如果您需解决具体问题(尤其法律、医学等领域)，建议您详细咨询相关领域专业人士。
+举报作者声明：本篇经验系本人依照真实经历原创，未经许可，谢绝转载。
+投票(174)
+有得(0)
+我有疑问(0)
+换一批相关经验
+OPENCV入门教程二：opencv+VS2015开发环境配置32016.07.27
+vs2012+opencv2.4.13的环境配置（Windows10）32016.10.18
+win10系统下VS2013中配置opencv2.4.902016.09.28
+如何在VS2013下配置opencv2.4.11202015.08.11
+opencv 开发环境配置 visual studio，cmake02016.06.22
+今日支出元
+写经验 有钱赚 >>
+
+yexinrong18
+作者的经验
+
+nginx服务器应用：[2]nginx+php设置
+nginx服务器应用：[1]windows下安装n...
+Microsoft office 2013 安装激活
+visual studio 2013安装激活破解
+UltraISO制作U盘启动，安装windows或...
+如要投诉，请到百度经验投诉中心，如要提出意见、建议， 请到百度经验管理吧反馈。
+热门杂志
+第1期
+你不知道的iPad技巧
+3371次分享
+第1期
+win7电脑那些事
+5845次分享
+第2期
+新人玩转百度经验
+1095次分享
+第1期
+Win8.1实用小技巧
+2467次分享
+第1期
+小白装大神
+1577次分享
+?2017Baidu  使用百度前必读  百度经验协议  作者创作作品协议
+weixinjianwo
+
+1
+2
+3
+4
